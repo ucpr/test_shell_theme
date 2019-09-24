@@ -11,7 +11,7 @@ export HINA_PATH="/home/ucpr/Works/hina/hina"
 
 autoload -Uz add-zsh-hook
 _hina_prompt() {
-	PROMPT=$HINA_PATH
+  PROMPT=$($HINA_PATH)
 }
 
 add-zsh-hook precmd _hina_prompt
