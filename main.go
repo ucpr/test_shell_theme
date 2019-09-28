@@ -8,4 +8,5 @@ import (
 func main() {
 	fmt.Println()
 	fmt.Println(prompt.GetPromptLine())
+	fmt.Println("$ ")
 }
