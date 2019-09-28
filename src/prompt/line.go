@@ -2,6 +2,7 @@ package prompt
 
 import (
 	"os"
+	colors "github.com/logrusorgru/aurora"
 )
 
 func getCurrentDir() string {
@@ -14,7 +15,8 @@ func getCurrentDir() string {
 
 // GetPromptLine ...
 func GetPromptLine() string {
-	gitBranch := GetCurrentBranch()
+	currentDir := colors.Magenta(getCurrentDir()).String()
+	gitBranch := colors.Brown(GetCurrentBranch()).String()
 	gitMark := GetGitStatus()
-	return getCurrentDir() + " " + gitBranch + gitMark +  "\n\n$ "
+	return currentDir + " " + gitBranch + gitMark + " "
 }
