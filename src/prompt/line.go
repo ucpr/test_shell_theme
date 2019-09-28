@@ -15,5 +15,6 @@ func getCurrentDir() string {
 // GetPromptLine ...
 func GetPromptLine() string {
 	gitBranch := GetCurrentBranch()
-	return getCurrentDir() + " " + gitBranch + "\n$ "
+	gitMark := GetGitStatus()
+	return getCurrentDir() + " " + gitBranch + gitMark +  "\n\n$ "
 }
