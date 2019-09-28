@@ -1,5 +1,7 @@
 # hina
 
+![hina](./screen.png "hina")
+
 hina is a shell theme for bash and zsh.
 
 ## Usage
