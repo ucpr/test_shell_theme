@@ -18,6 +18,7 @@ var (
 )
 
 // TODO: I will back.(refactor)
+// 複数あったら1つにする.いまはまだ
 func transStatusToMark(out string) string {
 	var result string
 
