@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"hina/src/prompt"
+	"hina/prompt"
 )
 
 func main() {
