@@ -4,6 +4,8 @@
 
 hina is a shell theme for bash and zsh.
 
+** work in progress **
+
 ## Usage
 
 work in progress
