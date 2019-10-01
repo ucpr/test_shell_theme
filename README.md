@@ -9,8 +9,7 @@ hina is a shell theme for bash and zsh.
 ## Feature
 - git branch
 - git status
-- kubernetes cluster [WIP]
-- kubernetes namespace [WIP]
+- kubernetes context
 
 If you have the features you want, create an issue please.
 
@@ -53,9 +52,17 @@ mark to represent git status
 | `HINA_GIT_UNMERGED`  | `=`            |
 | `HINA_GIT_UNTRACKED` | `!`            |
 
+if you want to display k8s context, run `export HINA_K8S=on`
+
+| name       | default   |
+|------------|-----------|
+| `HINA_K8S` | `off`     |
+
+## Contributions
+Welcome!!
+
 ## Author
 taichi uchihara (@u\_chi\_ha\_ra\_)
 
 ## LICENCE
-
 MIT LICENCE
