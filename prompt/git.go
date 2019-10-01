@@ -18,27 +18,35 @@ var (
 )
 
 // TODO: I will back.(refactor)
-// 複数あったら1つにする.いまはまだ
 func transStatusToMark(out string) string {
+	var flags [7]bool
 	var result string
 
 	for _, row := range strings.Split(out, "\n") {
 		prefix := strings.Split(strings.TrimSpace(row), " ")[0]
-		switch prefix {
-		case "M":
+
+		switch {
+		case prefix == "M" && !flags[0]:
 			result += MODIFIED
-		case "A":
+			flags[0] = true
+		case prefix == "A" && !flags[1]:
 			result += ADDED
-		case "D":
+			flags[1] = true
+		case prefix == "D" && !flags[2]:
 			result += DELETED
-		case "R":
+			flags[2] = true
+		case prefix == "R" && !flags[3]:
 			result += COPIED
-		case "C":
+			flags[3] = true
+		case prefix == "C" && !flags[4]:
 			result += RENAMED
-		case "U":
+			flags[4] = true
+		case prefix == "U" && !flags[5]:
 			result += UNMERGED
-		case "??":
+			flags[5] = true
+		case prefix == "??" && !flags[6]:
 			result += UNTRACKED
+			flags[6] = true
 		}
 	}
 	return result
