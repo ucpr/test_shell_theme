@@ -1,51 +1,54 @@
 package prompt
 
 import (
-	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/kelseyhightower/envconfig"
 )
 
-// using const
-var (
-	MODIFIED  = os.Getenv("HINA_GIT_MODIFIED")
-	ADDED     = os.Getenv("HINA_GIT_ADDED")
-	DELETED   = os.Getenv("HINA_GIT_DELETED")
-	COPIED    = os.Getenv("HINA_GIT_COPIED")
-	RENAMED   = os.Getenv("HINA_GIT_RENAMED")
-	UNMERGED  = os.Getenv("HINA_GIT_UNMERGED")
-	UNTRACKED = os.Getenv("HINA_GIT_UNTRACKED")
-)
+type hinaGitEnv struct {
+	Modified  string `envconfig:"HINA_GIT_MODIFIED" default:"*"`
+	Added     string `envconfig:"HINA_GIT_ADDED" default:"+"`
+	Deleted   string `envconfig:"HINA_GIT_DELETED" default:"-"`
+	Renamed   string `envconfig:"HINA_GIT_RENAMED" default:"&"`
+	Copied    string `envconfig:"HINA_GIT_COPIED" default:"~"`
+	Unmerged  string `envconfig:"HINA_GIT_UNMERGED" default:"="`
+	Untracked string `envconfig:"HINA_GIT_UNTRACKED" default:"!"`
+}
 
 // TODO: I will back.(refactor)
 func transStatusToMark(out string) string {
+	var env hinaGitEnv
 	var flags [7]bool
 	var result string
+
+	envconfig.Process("hina_git", &env)
 
 	for _, row := range strings.Split(out, "\n") {
 		prefix := strings.Split(strings.TrimSpace(row), " ")[0]
 
 		switch {
 		case prefix == "M" && !flags[0]:
-			result += MODIFIED
+			result += env.Modified
 			flags[0] = true
 		case prefix == "A" && !flags[1]:
-			result += ADDED
+			result += env.Added
 			flags[1] = true
 		case prefix == "D" && !flags[2]:
-			result += DELETED
+			result += env.Deleted
 			flags[2] = true
 		case prefix == "R" && !flags[3]:
-			result += COPIED
+			result += env.Renamed
 			flags[3] = true
 		case prefix == "C" && !flags[4]:
-			result += RENAMED
+			result += env.Copied
 			flags[4] = true
 		case prefix == "U" && !flags[5]:
-			result += UNMERGED
+			result += env.Unmerged
 			flags[5] = true
 		case prefix == "??" && !flags[6]:
-			result += UNTRACKED
+			result += env.Untracked
 			flags[6] = true
 		}
 	}
