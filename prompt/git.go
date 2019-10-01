@@ -17,6 +17,14 @@ type hinaGitEnv struct {
 	Untracked string `envconfig:"HINA_GIT_UNTRACKED" default:"!"`
 }
 
+func existGit() bool {
+	cmd := exec.Command("git", "--help")
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	return true
+}
+
 // TODO: I will back.(refactor)
 func transStatusToMark(out string) string {
 	var env hinaGitEnv
