@@ -63,8 +63,7 @@ func transStatusToMark(out string) string {
 	return result
 }
 
-// GetGitStatus ...
-func GetGitStatus() string {
+func getGitStatus() string {
 	out, err := exec.Command("git", "status", "--short").Output()
 	if err != nil {
 		return ""
@@ -74,8 +73,7 @@ func GetGitStatus() string {
 	return mark
 }
 
-// GetCurrentBranch ...
-func GetCurrentBranch() string {
+func getCurrentBranch() string {
 	out, err := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD").Output()
 	if err != nil {
 		return ""
