@@ -2,6 +2,7 @@ package prompt
 
 import (
 	"os"
+
 	colors "github.com/logrusorgru/aurora"
 )
 
