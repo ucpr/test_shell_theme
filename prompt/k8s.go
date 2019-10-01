@@ -36,11 +36,19 @@ func getCurrentContext() string {
 	return conf.CurrentContext
 }
 
+func existK8s() bool {
+	cmd := exec.Command("kubectl", "version")
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	return true
+}
+
 // GetK8sContext ...
 func GetK8sContext() string {
 	var env hinaK8sEnv
 	envconfig.Process("hina_k8s", &env)
-	if env.K8sOn != "on" {
+	if env.K8sOn != "on" || !existK8s() {
 		return ""
 	}
 
