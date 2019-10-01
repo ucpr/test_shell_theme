@@ -1,4 +1,4 @@
-module hina
+module github.com/ucpr/hina
 
 go 1.13
 
