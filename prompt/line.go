@@ -17,7 +17,12 @@ func getCurrentDir() string {
 // GetPromptLine ...
 func GetPromptLine() string {
 	currentDir := colors.Magenta(getCurrentDir()).String()
-	gitBranch := colors.Brown(GetCurrentBranch()).String()
-	gitMark := GetGitStatus()
+	var gitBranch string
+	var gitMark string
+
+	if existGit() {
+		gitBranch = colors.Brown(getCurrentBranch()).String()
+		gitMark = getGitStatus()
+	}
 	return currentDir + " " + gitBranch + gitMark + " "
 }
